@@ -1,6 +1,8 @@
 forca = []
 letrasUsadas = []
+# O usário digita a palavra que deseja e então é transformada em uppercase para não ocorrer confusão. O mesmo acontece com a letra
 palavra = str(input("Digite sua palavra:"))
+palavra = palavra.upper()
 vidas = 6
 check = 0
 
@@ -41,6 +43,7 @@ def forcaCompleta():
         return 1
     else:
         return 0
+    
 # Função usada para imprimir a forca
 def imprimirForca():
     for i in palavra:
@@ -65,6 +68,7 @@ while vidas != 0:
     print("Quantidade de vidas", vidas)
     print("")
     letra = input("Digite a sua letra:")
+    letra = letra.upper()
     check = verLetra(letra)
     if check == 0:
         vidas -= 1
