@@ -1,8 +1,12 @@
+import os
+
 forca = []
 letrasUsadas = []
-# O usário digita a palavra que deseja e então é transformada em uppercase para não ocorrer confusão. O mesmo acontece com a letra
+# O usário digita a palavra que deseja e então é transformada em uppercase para não ocorrer confusão. O mesmo acontece com a letra.
 palavra = str(input("Digite sua palavra:"))
 palavra = palavra.upper()
+os.system('cls')
+
 vidas = 6
 check = 0
 
@@ -16,11 +20,11 @@ for i in palavra:
 def verLetra(letra):
     # Se a palavra ja tiver sido usada ele fala sobre isso e termina a função 
     if letra in letrasUsadas:
-        print("Essa letra já foi usada! Tente outra.")
+        print("Essa letra já foi usada! Tente outra.\n")
         return 1
     # Se a letra não estar na palavra o jogador perde uma vida
     elif letra not in palavra:
-        print("Essa letra não está na palavra!")
+        print("Essa letra não está na palavra!\n")
         letrasUsadas.append(letra)
         return 0
     # Vai vendo a letra 1 por um para colocar na forca se a letra estiver na palavra
@@ -28,7 +32,7 @@ def verLetra(letra):
         if letra == palavra[i]:
             forca[i] = letra
         i += i
-    print("Acertou uma letra!")
+    print("Acertou uma letra!\n")
     # Coloca a letra usada na lista de letras ja usadas
     letrasUsadas.append(letra)            
     return 1
@@ -51,11 +55,14 @@ def imprimirForca():
             print(i, end=" ")
         else:
             print("_", end=" ")
-    print("")
+    print("\n")
     return 0
     
 # Parte principal
-while vidas != 0:
+while True:
+    if vidas == 0:
+        print("Você perdeu!")
+        break
     check = forcaCompleta()
     if check == 1:
         print("Você acertou a palavra! Ela era:", palavra)
@@ -63,13 +70,15 @@ while vidas != 0:
     print("A forca está assim atualmente:")  
     #print(forca)  
     imprimirForca()    
-    print("Letras usadas:")
-    print(letrasUsadas)
+    print("Letras usadas:", letrasUsadas)
     print("Quantidade de vidas", vidas)
-    print("")
-    letra = input("Digite a sua letra:")
+    letra = input("\nDigite a sua letra:")
     letra = letra.upper()
-    check = verLetra(letra)
+    if len(letra) > 1:
+        print("Somente uma letra pode ser digitada!")
+        continue
+    else:
+        check = verLetra(letra)
     if check == 0:
         vidas -= 1
                 
